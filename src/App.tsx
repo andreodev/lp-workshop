@@ -1,5 +1,31 @@
-import React, { useEffect, useRef, useState, type ReactNode } from "react";
+import React, { useEffect, useState, type ReactNode } from "react";
 import { PlatformPreview } from "./components/PlatformPreview";
+import iconChart from "./assets/3d-icons/chart.webp";
+import iconBag from "./assets/3d-icons/bag.webp";
+import iconBulb from "./assets/3d-icons/bulb.webp";
+import iconChat from "./assets/3d-icons/chat.webp";
+import iconClock from "./assets/3d-icons/clock.webp";
+import iconComputer from "./assets/3d-icons/computer.webp";
+import iconCreditCard from "./assets/3d-icons/credit-card.webp";
+import iconFile from "./assets/3d-icons/file.webp";
+import iconFolder from "./assets/3d-icons/folder.webp";
+import iconKey from "./assets/3d-icons/key.webp";
+import iconLink from "./assets/3d-icons/link.webp";
+import iconLock from "./assets/3d-icons/lock.webp";
+import iconMegaphone from "./assets/3d-icons/megaphone.webp";
+import iconMobile from "./assets/3d-icons/mobile.webp";
+import iconMoney from "./assets/3d-icons/money.webp";
+import iconNotebook from "./assets/3d-icons/notebook.webp";
+import iconPalette from "./assets/3d-icons/palette.webp";
+import iconPaintingBrush from "./assets/3d-icons/painting-brush.webp";
+import iconRocket from "./assets/3d-icons/rocket.webp";
+import iconFlag from "./assets/3d-icons/flag.webp";
+import iconSetting from "./assets/3d-icons/setting.webp";
+import iconShield from "./assets/3d-icons/shield.webp";
+import iconTools from "./assets/3d-icons/tools.webp";
+import iconTarget from "./assets/3d-icons/target.webp";
+import iconTrophy from "./assets/3d-icons/trophy.webp";
+import iconWallet from "./assets/3d-icons/wallet.webp";
 import {
   AnimatePresence,
   LayoutGroup,
@@ -10,27 +36,12 @@ import {
   useSpring,
 } from "motion/react";
 import {
-  Cpu,
   ArrowRight,
   CheckCircle2,
   ChevronDown,
   Menu,
   X,
   Palette,
-  Globe,
-  Users,
-  LayoutDashboard,
-  Wrench,
-  Boxes,
-  Wallet,
-  FileBarChart,
-  MessageCircle,
-  ShieldCheck,
-  Building2,
-  Repeat,
-  Rocket,
-  Network,
-  Store,
   Mail,
 } from "lucide-react";
 
@@ -116,88 +127,56 @@ function ScrollProgress() {
   );
 }
 
-function NetworkCanvas() {
-  const ref = useRef<HTMLCanvasElement>(null);
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const context = canvas.getContext("2d");
-    if (!context) return;
-
-    const points = Array.from({ length: 34 }, (_, i) => ({
-      x: ((i * 73) % 101) / 100,
-      y: ((i * 47) % 97) / 96,
-      phase: i * 0.71,
-    }));
-    let frame = 0;
-    let width = 0;
-    let height = 0;
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      width = rect.width;
-      height = rect.height;
-      canvas.width = Math.round(width * ratio);
-      canvas.height = Math.round(height * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-    };
-
-    const draw = (time = 0) => {
-      context.clearRect(0, 0, width, height);
-      const nodes = points.map((point) => ({
-        x: point.x * width + Math.sin(time * 0.0002 + point.phase) * 13,
-        y: point.y * height + Math.cos(time * 0.00016 + point.phase) * 10,
-      }));
-
-      for (let i = 0; i < nodes.length; i += 1) {
-        for (let j = i + 1; j < nodes.length; j += 1) {
-          const distance = Math.hypot(
-            nodes[i].x - nodes[j].x,
-            nodes[i].y - nodes[j].y,
-          );
-          if (distance < 175) {
-            context.strokeStyle = `rgba(35,84,230,${(1 - distance / 175) * 0.14})`;
-            context.beginPath();
-            context.moveTo(nodes[i].x, nodes[i].y);
-            context.lineTo(nodes[j].x, nodes[j].y);
-            context.stroke();
-          }
-        }
-      }
-
-      nodes.forEach((node, i) => {
-        context.fillStyle =
-          i % 7 === 0 ? "rgba(35,84,230,.6)" : "rgba(91,141,239,.3)";
-        context.beginPath();
-        context.arc(node.x, node.y, i % 7 === 0 ? 2.4 : 1.4, 0, Math.PI * 2);
-        context.fill();
-      });
-      if (!reduceMotion) frame = requestAnimationFrame(draw);
-    };
-
-    const observer = new ResizeObserver(() => {
-      resize();
-      if (reduceMotion) draw();
-    });
-    observer.observe(canvas);
-    resize();
-    draw();
-
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
-  }, [reduceMotion]);
-
+function HeroBackdrop() {
   return (
-    <canvas
-      ref={ref}
-      aria-hidden="true"
-      className="canvas-network pointer-events-none absolute inset-0 h-full w-full"
-    />
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="hero-blueprint absolute inset-0" />
+      <div className="hero-glow absolute -right-24 -top-24 h-[34rem] w-[34rem] rounded-full" />
+
+      <motion.svg
+        viewBox="0 0 600 600"
+        className="hero-wheel absolute -right-52 top-10 h-[34rem] w-[34rem] sm:-right-24 sm:h-[42rem] sm:w-[42rem] lg:-right-16 lg:-top-4 lg:h-[50rem] lg:w-[50rem]"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 46, ease: "linear", repeat: Infinity }}
+      >
+        <circle cx="300" cy="300" r="270" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="18 10" />
+        <circle cx="300" cy="300" r="225" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="300" cy="300" r="168" fill="rgba(35,84,230,.025)" stroke="currentColor" strokeWidth="2" strokeDasharray="3 12" />
+        <g fill="none" stroke="currentColor" strokeWidth="13" strokeLinecap="round">
+          <path d="M300 300 300 145" />
+          <path d="M300 300 434 222" />
+          <path d="M300 300 434 378" />
+          <path d="M300 300 300 455" />
+          <path d="M300 300 166 378" />
+          <path d="M300 300 166 222" />
+        </g>
+        <circle cx="300" cy="300" r="62" fill="white" stroke="currentColor" strokeWidth="4" />
+        <circle cx="300" cy="300" r="18" fill="currentColor" />
+      </motion.svg>
+
+      <svg viewBox="0 0 1440 720" preserveAspectRatio="none" className="hero-road absolute inset-x-0 bottom-0 h-[58%] w-full">
+        <g fill="none" stroke="currentColor">
+          <path d="M650 0 115 720M790 0 1325 720" strokeWidth="2" />
+          <path d="M690 0 510 720M750 0 930 720" strokeWidth="1.5" />
+          <path className="hero-road-flow" d="M720 0V720" strokeWidth="4" strokeDasharray="28 38" />
+          {[90, 190, 310, 455, 625].map((y) => (
+            <path key={y} d={`M${650 - y * 0.74} ${y} H${790 + y * 0.74}`} strokeWidth="1" opacity=".55" />
+          ))}
+        </g>
+      </svg>
+
+      {["01  ATENDIMENTO", "02  SERVIÇO", "03  ENTREGA"].map((label, index) => (
+        <motion.span
+          key={label}
+          className="hero-stage absolute hidden rounded-full border bg-white/70 px-3 py-1.5 font-mono text-[9px] font-semibold tracking-[.14em] text-[#2354E6] backdrop-blur sm:block"
+          style={{ left: `${8 + index * 17}%`, top: `${36 + index * 8}%` }}
+          animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 4 + index, delay: index * 0.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {label}
+        </motion.span>
+      ))}
+    </div>
   );
 }
 
@@ -450,25 +429,25 @@ function BrandSwapDemo() {
 
 const workshopItems = [
   {
-    icon: LayoutDashboard,
+    icon3d: iconNotebook,
     text: "Visão do que está acontecendo na oficina hoje",
   },
-  { icon: Wrench, text: "Orçamentos e ordens de serviço no mesmo lugar" },
-  { icon: Boxes, text: "Controle de produtos, estoque e fornecedores" },
-  { icon: Store, text: "Venda rápida no balcão" },
-  { icon: Wallet, text: "Contas a pagar, a receber e saldo da oficina" },
-  { icon: FileBarChart, text: "Relatórios e documentos prontos para enviar" },
-  { icon: MessageCircle, text: "Lembretes para clientes pelo WhatsApp" },
-  { icon: ShieldCheck, text: "Acesso seguro para cada pessoa da equipe" },
+  { icon3d: iconTools, text: "Orçamentos e ordens de serviço no mesmo lugar" },
+  { icon3d: iconFolder, text: "Controle de produtos, estoque e fornecedores" },
+  { icon3d: iconBag, text: "Venda rápida no balcão" },
+  { icon3d: iconWallet, text: "Contas a pagar, a receber e saldo da oficina" },
+  { icon3d: iconFile, text: "Relatórios e documentos prontos para enviar" },
+  { icon3d: iconChat, text: "Lembretes para clientes pelo WhatsApp" },
+  { icon3d: iconShield, text: "Acesso seguro para cada pessoa da equipe" },
 ];
 
 const adminItems = [
-  { icon: Building2, text: "Cadastro e acompanhamento de todas as oficinas" },
-  { icon: Palette, text: "Nome, logotipo, cores e imagens de cada marca" },
-  { icon: Globe, text: "Endereço próprio para acessar a plataforma" },
-  { icon: Users, text: "Controle de quem pode ver e fazer cada tarefa" },
-  { icon: LayoutDashboard, text: "Visão geral de toda a rede em um só lugar" },
-  { icon: FileBarChart, text: "Histórico das ações feitas na plataforma" },
+  { icon3d: iconComputer, text: "Cadastro e acompanhamento de todas as oficinas" },
+  { icon3d: iconPalette, text: "Nome, logotipo, cores e imagens de cada marca" },
+  { icon3d: iconLink, text: "Endereço próprio para acessar a plataforma" },
+  { icon3d: iconKey, text: "Controle de quem pode ver e fazer cada tarefa" },
+  { icon3d: iconChart, text: "Visão geral de toda a rede em um só lugar" },
+  { icon3d: iconClock, text: "Histórico das ações feitas na plataforma" },
 ];
 
 const flow = [
@@ -484,32 +463,32 @@ const flow = [
 
 const diferenciais = [
   {
-    icon: Palette,
+    icon3d: iconPaintingBrush,
     title: "A plataforma leva a sua marca",
     desc: "Use seu nome, logotipo, cores, endereço e documentos.",
   },
   {
-    icon: Network,
+    icon3d: iconLock,
     title: "Os dados de cada oficina ficam separados",
     desc: "Uma oficina não vê as informações da outra.",
   },
   {
-    icon: Wrench,
+    icon3d: iconFlag,
     title: "A rotina fica em um só lugar",
     desc: "Do primeiro atendimento ao pagamento e contato depois do serviço.",
   },
   {
-    icon: Building2,
+    icon3d: iconTrophy,
     title: "Você acompanha todas as oficinas",
     desc: "Cadastre unidades, organize acessos e veja a rede em uma única área.",
   },
   {
-    icon: Repeat,
+    icon3d: iconMoney,
     title: "Você pode vender seus próprios planos",
     desc: "Monte sua oferta e cobre uma assinatura dos seus clientes.",
   },
   {
-    icon: Rocket,
+    icon3d: iconTarget,
     title: "Você não precisa criar um sistema do zero",
     desc: "Comece com uma plataforma pronta e adapte a identidade ao seu negócio.",
   },
@@ -517,32 +496,32 @@ const diferenciais = [
 
 const audiences = [
   {
-    icon: Cpu,
+    icon3d: iconRocket,
     title: "Empresas de tecnologia",
     desc: "Para quem quer atender oficinas sem criar outro sistema do zero.",
   },
   {
-    icon: Network,
+    icon3d: iconMegaphone,
     title: "Redes e franquias",
     desc: "Para organizar várias oficinas e manter os dados de cada uma separados.",
   },
   {
-    icon: Store,
+    icon3d: iconCreditCard,
     title: "Distribuidores e fornecedores",
     desc: "Para oferecer mais uma solução útil aos clientes que já compram de você.",
   },
   {
-    icon: Users,
+    icon3d: iconBulb,
     title: "Consultorias automotivas",
     desc: "Para juntar seu método de trabalho a uma plataforma com a sua marca.",
   },
   {
-    icon: Repeat,
+    icon3d: iconMobile,
     title: "Quem quer vender software",
     desc: "Para criar planos mensais sem bancar o desenvolvimento de uma plataforma.",
   },
   {
-    icon: Building2,
+    icon3d: iconSetting,
     title: "Grupos com várias oficinas",
     desc: "Para acompanhar unidades, pessoas e resultados em um só lugar.",
   },
@@ -836,8 +815,14 @@ export default function AutoCoreLanding() {
         ::selection { background: ${COLORS.blue}; color: #fff; }
         .btn-primary { background: ${COLORS.blue}; color: #fff; box-shadow: 0 10px 28px rgba(35,84,230,.22); }
         .btn-primary:hover { background: ${COLORS.blueDark}; transform: translateY(-1px); }
-        .canvas-network { mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
-        .hero-grid { background-image: linear-gradient(rgba(35,84,230,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(35,84,230,.055) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse 75% 80% at 70% 40%, black, transparent); }
+        .hero-blueprint { background-color: #F7F9FF; background-image: linear-gradient(rgba(35,84,230,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(35,84,230,.06) 1px, transparent 1px), radial-gradient(circle at 78% 14%, rgba(73,116,255,.2), transparent 34%), radial-gradient(circle at 18% 58%, rgba(255,153,51,.1), transparent 26%); background-size: 48px 48px, 48px 48px, auto, auto; mask-image: linear-gradient(to bottom, black 72%, transparent); }
+        .hero-glow { background: conic-gradient(from 210deg, rgba(35,84,230,.28), rgba(91,141,239,.04), rgba(255,153,51,.18), rgba(35,84,230,.28)); filter: blur(70px); animation: hero-breathe 9s ease-in-out infinite; }
+        .hero-wheel { color: rgba(35,84,230,.13); filter: drop-shadow(0 28px 45px rgba(35,84,230,.08)); transform-origin: center; mask-image: linear-gradient(125deg, transparent 4%, black 38%, black 72%, transparent 96%); }
+        .hero-road { color: rgba(35,84,230,.18); mask-image: linear-gradient(to bottom, transparent, black 22%, transparent 94%); }
+        .hero-road-flow { animation: road-flow 2.8s linear infinite; }
+        .hero-stage { border-color: rgba(35,84,230,.16); box-shadow: 0 10px 30px rgba(35,84,230,.08); }
+        @keyframes hero-breathe { 0%, 100% { transform: scale(1) translate3d(0,0,0); } 50% { transform: scale(1.14) translate3d(-28px,20px,0); } }
+        @keyframes road-flow { to { stroke-dashoffset: -66; } }
         .product-window { box-shadow: 0 36px 90px rgba(15,23,41,.15), 0 8px 28px rgba(35,84,230,.08); transform-style: preserve-3d; }
         .technical-card { position: relative; overflow: hidden; }
         .technical-card::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 36px; height: 2px; background: ${COLORS.blue}; transition: width .35s ease; }
@@ -927,15 +912,7 @@ export default function AutoCoreLanding() {
           className="relative isolate overflow-hidden border-b"
           style={{ borderColor: COLORS.line }}
         >
-          <div className="hero-grid pointer-events-none absolute inset-0" />
-          <NetworkCanvas />
-          <motion.div
-            aria-hidden="true"
-            className="absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full blur-3xl"
-            style={{ background: "rgba(91,141,239,.16)" }}
-            animate={{ scale: [1, 1.12, 1], x: [0, -22, 0], y: [0, 16, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <HeroBackdrop />
 
           <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl flex-col items-center gap-14 px-4 py-20 sm:px-6 lg:py-24">
             <div className="max-w-4xl text-center">
@@ -1142,34 +1119,36 @@ export default function AutoCoreLanding() {
                 da sua marca, dos seus clientes e acompanha todas as unidades.
               </p>
             </Reveal>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {audiences.map((item, i) => (
                 <Reveal key={item.title} delay={(i % 3) * 0.06}>
                   <motion.div
                     whileHover={{
                       y: -9,
                       scale: 1.02,
-                      color: "#FFFFFF",
-                      backgroundColor: COLORS.blue,
                       borderColor: COLORS.blue,
-                      boxShadow: "0 24px 60px rgba(35,84,230,.28)",
+                      boxShadow: "0 24px 60px rgba(35,84,230,.14)",
                     }}
                     transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="technical-card group h-full cursor-default rounded-2xl border bg-white p-6 shadow-[0_8px_30px_rgba(15,23,41,.04)]"
+                    className="technical-card group h-full cursor-default rounded-2xl border bg-white p-7 shadow-[0_8px_30px_rgba(15,23,41,.04)]"
                     style={{ borderColor: COLORS.line }}
                   >
                     <div className="flex items-start justify-between">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF3FF] transition-colors duration-300 group-hover:bg-white">
-                        <item.icon size={18} className="text-[#2354E6]" />
-                      </div>
-                      <span className="text-xs font-medium tracking-widest text-[#B5C0D3] transition-colors duration-300 group-hover:text-white/55">
+                      <motion.img
+                        src={item.icon3d}
+                        alt=""
+                        loading="lazy"
+                        whileHover={{ rotate: -6, scale: 1.1 }}
+                        className="h-16 w-16 rounded-2xl object-cover mix-blend-multiply"
+                      />
+                      <span className="text-xs font-medium tracking-widest text-[#B5C0D3]">
                         0{i + 1}
                       </span>
                     </div>
-                    <h3 className="display mt-5 text-base font-semibold">
+                    <h3 className="display mt-7 text-base font-semibold">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#64748B] transition-colors duration-300 group-hover:text-white/75">
+                    <p className="mt-2 text-sm leading-relaxed text-[#64748B]">
                       {item.desc}
                     </p>
                   </motion.div>
@@ -1217,21 +1196,21 @@ export default function AutoCoreLanding() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.35 }}
-                className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2"
+                className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2"
               >
                 {(prodTab === 0 ? workshopItems : adminItems).map((it) => (
                   <motion.div
                     key={it.text}
                     whileHover={{ x: 5, borderColor: COLORS.blueLight }}
-                    className="flex items-start gap-3 rounded-xl border bg-white p-4 shadow-[0_5px_20px_rgba(15,23,41,.025)]"
+                    className="flex items-center gap-5 rounded-xl border bg-white p-5 shadow-[0_5px_20px_rgba(15,23,41,.025)]"
                     style={{ borderColor: COLORS.line }}
                   >
-                    <div
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-                      style={{ background: COLORS.tint }}
-                    >
-                      <it.icon size={16} style={{ color: COLORS.blue }} />
-                    </div>
+                    <img
+                      src={it.icon3d}
+                      alt=""
+                      loading="lazy"
+                      className="h-12 w-12 shrink-0 rounded-xl object-cover mix-blend-multiply"
+                    />
                     <span
                       className="text-sm leading-snug"
                       style={{ color: COLORS.navy }}
@@ -1366,21 +1345,22 @@ export default function AutoCoreLanding() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
             {diferenciais.map((f, i) => (
               <Reveal key={f.title} delay={(i % 3) * 0.06}>
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25 }}
-                  className="h-full rounded-2xl border p-6"
+                  className="h-full rounded-2xl border p-7"
                   style={{ borderColor: COLORS.line }}
                 >
-                  <div
-                    className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg"
-                    style={{ background: COLORS.tint }}
-                  >
-                    <f.icon size={18} style={{ color: COLORS.blue }} />
-                  </div>
+                  <motion.img
+                    src={f.icon3d}
+                    alt=""
+                    loading="lazy"
+                    whileHover={{ rotate: 6, scale: 1.08 }}
+                    className="mb-7 h-20 w-20 rounded-2xl object-cover mix-blend-multiply"
+                  />
                   <h3 className="display text-base font-semibold">{f.title}</h3>
                   <p
                     className="mt-2 text-sm leading-relaxed"
