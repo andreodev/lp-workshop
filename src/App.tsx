@@ -27,6 +27,7 @@ import iconTools from "./assets/3d-icons/tools.webp";
 import iconTarget from "./assets/3d-icons/target.webp";
 import iconTrophy from "./assets/3d-icons/trophy.webp";
 import iconWallet from "./assets/3d-icons/wallet.webp";
+import iconWhatsappAutomation from "./assets/3d-icons/whatsapp-automation.png";
 import {
   AnimatePresence,
   LayoutGroup,
@@ -535,6 +536,15 @@ const flow = [
   "Pós-venda",
 ];
 
+const whatsappHighlights = [
+  "Confirmações, lembretes e avisos de veículo pronto",
+  "Orçamentos, aprovações e recusas pelo WhatsApp",
+  "Cobranças, links de pagamento e confirmação automática",
+  "Revisão preventiva, troca de óleo e serviços recorrentes",
+  "Pesquisas de satisfação e reativação de clientes antigos",
+  "Histórico, templates e mensagens com nome, veículo e placa",
+];
+
 const diferenciais = [
   {
     icon3d: iconPaintingBrush,
@@ -1009,6 +1019,7 @@ export default function OfixyLanding() {
 
             <nav className="hidden items-center gap-8 md:flex">
               <NavLink href="#produto">O que você recebe</NavLink>
+              <NavLink href="#whatsapp">WhatsApp</NavLink>
               <NavLink href="#como-funciona">Como funciona</NavLink>
               <NavLink href="#diferenciais">Vantagens</NavLink>
               <NavLink href="#faq">Dúvidas</NavLink>
@@ -1046,6 +1057,7 @@ export default function OfixyLanding() {
               >
                 <div className="flex flex-col gap-4 py-4">
                   <NavLink href="#produto">O que você recebe</NavLink>
+                  <NavLink href="#whatsapp">WhatsApp</NavLink>
                   <NavLink href="#como-funciona">Como funciona</NavLink>
                   <NavLink href="#diferenciais">Vantagens</NavLink>
                   <NavLink href="#faq">Dúvidas</NavLink>
@@ -1391,6 +1403,76 @@ export default function OfixyLanding() {
                 ))}
               </motion.div>
             </AnimatePresence>
+          </div>
+        </section>
+
+        {/* WHATSAPP */}
+        <section id="whatsapp" className="scroll-mt-20 py-24">
+          <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <Reveal>
+              <span
+                className="text-xs font-semibold tracking-widest"
+                style={{ color: COLORS.blue }}
+              >
+                AUTOMAÇÕES NO WHATSAPP
+              </span>
+              <h2 className="display mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+                Atenda, lembre e cobre seus clientes automaticamente pelo
+                WhatsApp
+              </h2>
+              <p
+                className="mt-4 text-sm leading-relaxed"
+                style={{ color: COLORS.muted }}
+              >
+                Automatize mensagens importantes da oficina, como confirmações
+                de agendamento, envio de orçamentos, avisos de veículo pronto,
+                lembretes de revisão, cobranças e pesquisas de satisfação. Tudo
+                com mensagens personalizadas para cada cliente, sem depender de
+                acompanhamento manual da equipe.
+              </p>
+              <motion.a
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary mt-7 inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-medium"
+              >
+                <WhatsAppIcon />
+                Ver automações para minha oficina
+              </motion.a>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div
+                className="grid gap-6 rounded-3xl border bg-white p-6 shadow-[0_18px_60px_rgba(15,23,41,.06)] sm:grid-cols-[180px_1fr] sm:items-center"
+                style={{ borderColor: COLORS.line }}
+              >
+                <img
+                  src={iconWhatsappAutomation}
+                  alt=""
+                  loading="lazy"
+                  className="mx-auto w-40 max-w-full rounded-3xl object-contain mix-blend-multiply sm:w-full"
+                />
+                <div className="grid gap-3">
+                  {whatsappHighlights.map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <CheckCircle2
+                        size={17}
+                        className="mt-0.5 shrink-0"
+                        style={{ color: COLORS.blue }}
+                      />
+                      <span
+                        className="text-sm leading-snug"
+                        style={{ color: COLORS.navy }}
+                      >
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
