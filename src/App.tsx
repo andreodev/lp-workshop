@@ -839,28 +839,32 @@ function WorkshopCarousel() {
 
 const faqs = [
   {
-    q: "A Ofixy pode ter a identidade da minha oficina?",
-    a: "Sim. A experiência pode usar seu nome, logotipo, cores, imagens, endereço na internet, documentos e e-mails.",
+    q: "Para quais tipos de oficina a Ofixy é indicada?",
+    a: "A Ofixy atende oficinas independentes, centros automotivos, operações especializadas e redes com várias unidades. A implantação é ajustada à estrutura e à rotina de cada negócio.",
   },
   {
-    q: "Os dados de uma oficina ficam separados das outras?",
-    a: "Sim. Cada oficina acessa somente suas próprias informações, clientes e serviços.",
+    q: "O que consigo controlar pela plataforma?",
+    a: "Você pode organizar clientes e veículos, orçamentos, ordens de serviço, pátio, estoque, vendas, contas a pagar e receber, além do relacionamento com o cliente após o serviço.",
   },
   {
-    q: "Posso acompanhar várias oficinas?",
-    a: "Sim. Você cadastra as unidades, organiza os acessos e acompanha toda a rede em uma área administrativa.",
+    q: "A plataforma pode ter a identidade da minha oficina?",
+    a: "Sim. A experiência pode receber seu nome, logotipo, cores, imagens, endereço na internet e documentos personalizados para manter a comunicação da sua marca consistente.",
   },
   {
-    q: "O que a oficina consegue fazer no sistema?",
-    a: "Cadastrar clientes e veículos, criar orçamentos e ordens de serviço, controlar estoque, vendas, contas e manter contato com o cliente depois do serviço.",
+    q: "Consigo acompanhar mais de uma unidade?",
+    a: "Sim. Você pode organizar acessos, manter os dados de cada unidade separados e acompanhar toda a operação por uma área de gestão centralizada.",
   },
   {
-    q: "Posso usar meu próprio endereço na internet?",
-    a: "Sim. Ajudamos a configurar um endereço próprio para que a plataforma tenha ainda mais a cara da sua marca.",
+    q: "Como funciona a implantação na oficina?",
+    a: "Primeiro entendemos seu fluxo de trabalho, sua equipe e seus objetivos. Depois configuramos a experiência e orientamos os próximos passos para colocar a operação na plataforma com segurança.",
   },
   {
-    q: "Como faço para contratar?",
-    a: "Fale com a gente pelo WhatsApp. Primeiro entendemos seu negócio, mostramos a plataforma e explicamos valores e próximos passos com clareza.",
+    q: "Os dados da minha oficina ficam protegidos?",
+    a: "A plataforma possui acessos individuais e permissões para organizar o que cada pessoa pode visualizar ou alterar. Em operações com várias unidades, as informações permanecem separadas.",
+  },
+  {
+    q: "Como posso conhecer a Ofixy e receber uma proposta?",
+    a: "Fale com a gente pelo WhatsApp. Vamos entender sua oficina, apresentar a plataforma e explicar a configuração, os valores e os próximos passos sem compromisso.",
   },
 ];
 
