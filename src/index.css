@@ -4,6 +4,7 @@ html {
   scroll-behavior: smooth;
   max-width: 100%;
   overflow-x: hidden;
+  background: #06101f;
 }
 
 body {
@@ -11,7 +12,10 @@ body {
   min-width: 320px;
   max-width: 100%;
   overflow-x: hidden;
-  background: #fff;
+  background: #06101f;
+  color: #06101f;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 button,
@@ -21,4 +25,9 @@ a {
 
 button {
   cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid #12b8ff;
+  outline-offset: 3px;
 }

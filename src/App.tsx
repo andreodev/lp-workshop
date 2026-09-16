@@ -1,5 +1,6 @@
 import React, { useEffect, useState, type ReactNode } from "react";
 import { PlatformPreview } from "./components/PlatformPreview";
+import ofixyMark from "./assets/ofixy-mark.png";
 import iconChart from "./assets/3d-icons/chart.webp";
 import iconBag from "./assets/3d-icons/bag.webp";
 import iconBulb from "./assets/3d-icons/bulb.webp";
@@ -46,22 +47,22 @@ import {
 } from "lucide-react";
 
 /* ------------------------------------------------------------------
-   AutoCore — plataforma white-label de gestão para oficinas
+   Ofixy — gestão personalizada para oficinas
    Dois ambientes: plataforma da oficina + painel administrativo
 
    Tokens
    bg:            #FFFFFF
    bg-soft:       #F6F8FC
    bg-tint:       #EEF3FF
-   azul:          #2354E6
-   azul-escuro:   #0F1729
-   azul-claro:    #5B8DEF
-   texto-suave:   #64748B
-   linha:         #E6EBF5
+   azul:          #075FE8
+   azul-escuro:   #06101F
+   azul-claro:    #12B8FF
+   texto-suave:   #5F6F86
+   linha:         #DDE8F5
    Display: Space Grotesk / Corpo: Inter
 ------------------------------------------------------------------- */
 
-const FONT_ID = "autocore-fonts";
+const FONT_ID = "Ofixy-fonts";
 function useFonts() {
   useEffect(() => {
     if (document.getElementById(FONT_ID)) return;
@@ -75,18 +76,18 @@ function useFonts() {
 }
 
 const COLORS = {
-  blue: "#2354E6",
-  blueDark: "#173BAA",
-  blueLight: "#5B8DEF",
-  navy: "#0F1729",
-  muted: "#64748B",
-  line: "#E6EBF5",
-  soft: "#F6F8FC",
-  tint: "#EEF3FF",
+  blue: "#075FE8",
+  blueDark: "#0347B8",
+  blueLight: "#12B8FF",
+  navy: "#06101F",
+  muted: "#5F6F86",
+  line: "#DDE8F5",
+  soft: "#F5F9FF",
+  tint: "#EAF5FF",
 };
 
 const WHATSAPP_URL =
-  "https://wa.me/5511925592834?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20a%20oferecer%20a%20plataforma%20com%20a%20minha%20marca.";
+  "https://wa.me/5511925592834?text=Ol%C3%A1%2C%20quero%20conhecer%20a%20Ofixy%20e%20personalizar%20a%20gest%C3%A3o%20da%20minha%20oficina.";
 
 function Reveal({
   children,
@@ -129,7 +130,10 @@ function ScrollProgress() {
 
 function HeroBackdrop() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+    >
       <div className="hero-blueprint absolute inset-0" />
       <div className="hero-glow absolute -right-24 -top-24 h-[34rem] w-[34rem] rounded-full" />
 
@@ -139,10 +143,38 @@ function HeroBackdrop() {
         animate={{ rotate: 360 }}
         transition={{ duration: 46, ease: "linear", repeat: Infinity }}
       >
-        <circle cx="300" cy="300" r="270" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="18 10" />
-        <circle cx="300" cy="300" r="225" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="300" cy="300" r="168" fill="rgba(35,84,230,.025)" stroke="currentColor" strokeWidth="2" strokeDasharray="3 12" />
-        <g fill="none" stroke="currentColor" strokeWidth="13" strokeLinecap="round">
+        <circle
+          cx="300"
+          cy="300"
+          r="270"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeDasharray="18 10"
+        />
+        <circle
+          cx="300"
+          cy="300"
+          r="225"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <circle
+          cx="300"
+          cy="300"
+          r="168"
+          fill="rgba(18,184,255,.035)"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeDasharray="3 12"
+        />
+        <g
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="13"
+          strokeLinecap="round"
+        >
           <path d="M300 300 300 145" />
           <path d="M300 300 434 222" />
           <path d="M300 300 434 378" />
@@ -150,17 +182,38 @@ function HeroBackdrop() {
           <path d="M300 300 166 378" />
           <path d="M300 300 166 222" />
         </g>
-        <circle cx="300" cy="300" r="62" fill="white" stroke="currentColor" strokeWidth="4" />
+        <circle
+          cx="300"
+          cy="300"
+          r="62"
+          fill="white"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
         <circle cx="300" cy="300" r="18" fill="currentColor" />
       </motion.svg>
 
-      <svg viewBox="0 0 1440 720" preserveAspectRatio="none" className="hero-road absolute inset-x-0 bottom-0 h-[58%] w-full">
+      <svg
+        viewBox="0 0 1440 720"
+        preserveAspectRatio="none"
+        className="hero-road absolute inset-x-0 bottom-0 h-[58%] w-full"
+      >
         <g fill="none" stroke="currentColor">
           <path d="M650 0 115 720M790 0 1325 720" strokeWidth="2" />
           <path d="M690 0 510 720M750 0 930 720" strokeWidth="1.5" />
-          <path className="hero-road-flow" d="M720 0V720" strokeWidth="4" strokeDasharray="28 38" />
+          <path
+            className="hero-road-flow"
+            d="M720 0V720"
+            strokeWidth="4"
+            strokeDasharray="28 38"
+          />
           {[90, 190, 310, 455, 625].map((y) => (
-            <path key={y} d={`M${650 - y * 0.74} ${y} H${790 + y * 0.74}`} strokeWidth="1" opacity=".55" />
+            <path
+              key={y}
+              d={`M${650 - y * 0.74} ${y} H${790 + y * 0.74}`}
+              strokeWidth="1"
+              opacity=".55"
+            />
           ))}
         </g>
       </svg>
@@ -168,10 +221,15 @@ function HeroBackdrop() {
       {["01  ATENDIMENTO", "02  SERVIÇO", "03  ENTREGA"].map((label, index) => (
         <motion.span
           key={label}
-          className="hero-stage absolute hidden rounded-full border bg-white/70 px-3 py-1.5 font-mono text-[9px] font-semibold tracking-[.14em] text-[#2354E6] backdrop-blur sm:block"
+          className="hero-stage absolute hidden rounded-full border bg-white/90 px-3 py-1.5 font-mono text-[9px] font-semibold tracking-[.14em] text-[#075FE8] backdrop-blur sm:block"
           style={{ left: `${8 + index * 17}%`, top: `${36 + index * 8}%` }}
           animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 4 + index, delay: index * 0.6, repeat: Infinity, ease: "easeInOut" }}
+          transition={{
+            duration: 4 + index,
+            delay: index * 0.6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         >
           {label}
         </motion.span>
@@ -196,18 +254,28 @@ function NavLink({ href, children }: { href: string; children: ReactNode }) {
 
 function BrandMark() {
   return (
-    <motion.div
-      whileHover={{ rotate: 90, scale: 1.06 }}
+    <motion.img
+      src={ofixyMark}
+      alt=""
+      whileHover={{ rotate: -4, scale: 1.06 }}
       transition={{ type: "spring", stiffness: 260, damping: 18 }}
-      className="grid h-8 w-8 grid-cols-2 gap-[3px] rounded-[9px] p-[6px]"
-      style={{ background: COLORS.blue }}
+      className="h-10 w-10 object-contain"
       aria-hidden="true"
-    >
-      <span className="rounded-[2px] bg-white" />
-      <span className="rounded-[2px] bg-white/45" />
-      <span className="rounded-[2px] bg-white/45" />
-      <span className="rounded-[2px] bg-white" />
-    </motion.div>
+    />
+  );
+}
+
+function BrandLogo({ light = false }: { light?: boolean }) {
+  return (
+    <div className="flex items-center gap-2.5" aria-label="Ofixy">
+      <BrandMark />
+      <span
+        className="display text-[1.35rem] font-bold tracking-[-.055em]"
+        style={{ color: light ? "#F7FAFF" : COLORS.navy }}
+      >
+        ofi<span style={{ color: COLORS.blueLight }}>x</span>y
+      </span>
+    </div>
   );
 }
 
@@ -307,7 +375,7 @@ function FaqItem({
   );
 }
 
-/* ---------- white-label brand-swap signature element ---------- */
+/* ---------- personalized brand preview ---------- */
 
 const brandPresets = [
   { name: "Central Motors", initials: "CM", color: "#2354E6" },
@@ -442,8 +510,14 @@ const workshopItems = [
 ];
 
 const adminItems = [
-  { icon3d: iconComputer, text: "Cadastro e acompanhamento de todas as oficinas" },
-  { icon3d: iconPalette, text: "Nome, logotipo, cores e imagens de cada marca" },
+  {
+    icon3d: iconComputer,
+    text: "Cadastro e acompanhamento de todas as oficinas",
+  },
+  {
+    icon3d: iconPalette,
+    text: "Nome, logotipo, cores e imagens de cada marca",
+  },
   { icon3d: iconLink, text: "Endereço próprio para acessar a plataforma" },
   { icon3d: iconKey, text: "Controle de quem pode ver e fazer cada tarefa" },
   { icon3d: iconChart, text: "Visão geral de toda a rede em um só lugar" },
@@ -464,8 +538,8 @@ const flow = [
 const diferenciais = [
   {
     icon3d: iconPaintingBrush,
-    title: "A plataforma leva a sua marca",
-    desc: "Use seu nome, logotipo, cores, endereço e documentos.",
+    title: "Uma experiência com a sua identidade",
+    desc: "Seu nome, logotipo, cores e documentos em uma experiência consistente.",
   },
   {
     icon3d: iconLock,
@@ -479,51 +553,51 @@ const diferenciais = [
   },
   {
     icon3d: iconTrophy,
-    title: "Você acompanha todas as oficinas",
-    desc: "Cadastre unidades, organize acessos e veja a rede em uma única área.",
+    title: "Todas as unidades sob controle",
+    desc: "Organize acessos e acompanhe a operação em uma única visão.",
   },
   {
     icon3d: iconMoney,
-    title: "Você pode vender seus próprios planos",
-    desc: "Monte sua oferta e cobre uma assinatura dos seus clientes.",
+    title: "Decisões guiadas por resultados",
+    desc: "Acompanhe o financeiro e transforme dados da rotina em ações claras.",
   },
   {
     icon3d: iconTarget,
-    title: "Você não precisa criar um sistema do zero",
-    desc: "Comece com uma plataforma pronta e adapte a identidade ao seu negócio.",
+    title: "Implantação feita para o seu cenário",
+    desc: "Comece com uma solução madura, adaptada à identidade e à rotina da oficina.",
   },
 ];
 
 const audiences = [
   {
     icon3d: iconRocket,
-    title: "Empresas de tecnologia",
-    desc: "Para quem quer atender oficinas sem criar outro sistema do zero.",
+    title: "Oficinas independentes",
+    desc: "Para organizar a operação, atender melhor e crescer com controle.",
   },
   {
     icon3d: iconMegaphone,
-    title: "Redes e franquias",
-    desc: "Para organizar várias oficinas e manter os dados de cada uma separados.",
+    title: "Centros automotivos",
+    desc: "Para conectar atendimento, pátio, estoque e financeiro em um só fluxo.",
   },
   {
     icon3d: iconCreditCard,
-    title: "Distribuidores e fornecedores",
-    desc: "Para oferecer mais uma solução útil aos clientes que já compram de você.",
+    title: "Redes e franquias",
+    desc: "Para manter o padrão da marca e acompanhar todas as unidades.",
   },
   {
     icon3d: iconBulb,
-    title: "Consultorias automotivas",
-    desc: "Para juntar seu método de trabalho a uma plataforma com a sua marca.",
+    title: "Oficinas especializadas",
+    desc: "Para adaptar a experiência ao seu jeito de trabalhar e à sua identidade.",
   },
   {
     icon3d: iconMobile,
-    title: "Quem quer vender software",
-    desc: "Para criar planos mensais sem bancar o desenvolvimento de uma plataforma.",
+    title: "Operações em expansão",
+    desc: "Para ganhar escala sem perder visibilidade sobre clientes e resultados.",
   },
   {
     icon3d: iconSetting,
-    title: "Grupos com várias oficinas",
-    desc: "Para acompanhar unidades, pessoas e resultados em um só lugar.",
+    title: "Gestores exigentes",
+    desc: "Para transformar dados da rotina em decisões mais rápidas e seguras.",
   },
 ];
 
@@ -765,8 +839,8 @@ function WorkshopCarousel() {
 
 const faqs = [
   {
-    q: "A plataforma aparece com a minha marca?",
-    a: "Sim. Ela pode usar seu nome, logotipo, cores, imagens, endereço na internet, documentos e e-mails.",
+    q: "A Ofixy pode ter a identidade da minha oficina?",
+    a: "Sim. A experiência pode usar seu nome, logotipo, cores, imagens, endereço na internet, documentos e e-mails.",
   },
   {
     q: "Os dados de uma oficina ficam separados das outras?",
@@ -790,13 +864,97 @@ const faqs = [
   },
 ];
 
+function AboutModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#06101F]/70 p-4 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onMouseDown={onClose}
+    >
+      <motion.section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="about-ofixy-title"
+        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border bg-white p-6 shadow-2xl sm:p-8"
+        style={{ borderColor: COLORS.line }}
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.98 }}
+        transition={{ duration: 0.22 }}
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          autoFocus
+          aria-label="Fechar janela sobre a Ofixy"
+          className="absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-600 transition-colors hover:bg-slate-200"
+        >
+          <X size={17} />
+        </button>
+
+        <span className="text-xs font-semibold uppercase tracking-[.16em]" style={{ color: COLORS.blue }}>
+          Sobre a Ofixy
+        </span>
+        <h2 id="about-ofixy-title" className="display mt-3 max-w-xl text-3xl font-semibold tracking-tight text-slate-950">
+          Software de gestão completo para oficinas mecânicas
+        </h2>
+        <p className="mt-5 leading-relaxed" style={{ color: COLORS.muted }}>
+          A Ofixy reúne atendimento, clientes, veículos, orçamentos, ordens de serviço, estoque, vendas e financeiro em uma única plataforma. Cada oficina pode usar sua própria marca, cores, domínio e documentos.
+        </p>
+
+        <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          {[
+            ["Operação integrada", "Acompanhe o serviço desde a entrada do veículo até o pagamento e o pós-venda."],
+            ["Gestão de redes", "Organize unidades, equipes, permissões e resultados em uma área administrativa."],
+            ["Marca própria", "Entregue uma experiência personalizada para oficinas, funcionários e clientes."],
+            ["Decisões mais claras", "Centralize indicadores, movimentações financeiras e informações da rotina."],
+          ].map(([title, description]) => (
+            <article key={title} className="rounded-2xl border bg-slate-50 p-4" style={{ borderColor: COLORS.line }}>
+              <h3 className="font-semibold text-slate-900">{title}</h3>
+              <p className="mt-1 text-sm leading-relaxed" style={{ color: COLORS.muted }}>{description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-7 flex flex-wrap gap-3">
+          <a href="#produto" onClick={onClose} className="btn-primary rounded-lg px-5 py-2.5 text-sm font-medium">
+            Conhecer a plataforma
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="rounded-lg border px-5 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50" style={{ borderColor: COLORS.line }}>
+            Falar com a Ofixy
+          </a>
+        </div>
+      </motion.section>
+    </motion.div>
+  );
+}
+
 /* ---------- main ---------- */
 
-export default function AutoCoreLanding() {
+export default function OfixyLanding() {
   useFonts();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [prodTab, setProdTab] = useState(0);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -813,17 +971,17 @@ export default function AutoCoreLanding() {
         * { box-sizing: border-box; }
         .display { font-family: 'Geist', sans-serif; }
         ::selection { background: ${COLORS.blue}; color: #fff; }
-        .btn-primary { background: ${COLORS.blue}; color: #fff; box-shadow: 0 10px 28px rgba(35,84,230,.22); }
-        .btn-primary:hover { background: ${COLORS.blueDark}; transform: translateY(-1px); }
-        .hero-blueprint { background-color: #F7F9FF; background-image: linear-gradient(rgba(35,84,230,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(35,84,230,.06) 1px, transparent 1px), radial-gradient(circle at 78% 14%, rgba(73,116,255,.2), transparent 34%), radial-gradient(circle at 18% 58%, rgba(255,153,51,.1), transparent 26%); background-size: 48px 48px, 48px 48px, auto, auto; mask-image: linear-gradient(to bottom, black 72%, transparent); }
-        .hero-glow { background: conic-gradient(from 210deg, rgba(35,84,230,.28), rgba(91,141,239,.04), rgba(255,153,51,.18), rgba(35,84,230,.28)); filter: blur(70px); animation: hero-breathe 9s ease-in-out infinite; }
-        .hero-wheel { color: rgba(35,84,230,.13); filter: drop-shadow(0 28px 45px rgba(35,84,230,.08)); transform-origin: center; mask-image: linear-gradient(125deg, transparent 4%, black 38%, black 72%, transparent 96%); }
-        .hero-road { color: rgba(35,84,230,.18); mask-image: linear-gradient(to bottom, transparent, black 22%, transparent 94%); }
+        .btn-primary { background: linear-gradient(135deg, ${COLORS.blueLight}, ${COLORS.blue}); color: #fff; box-shadow: 0 14px 36px rgba(7,95,232,.32); }
+        .btn-primary:hover { background: linear-gradient(135deg, #33C5FF, ${COLORS.blueDark}); transform: translateY(-1px); }
+        .hero-blueprint { background-color: ${COLORS.navy}; background-image: linear-gradient(rgba(18,184,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(18,184,255,.07) 1px, transparent 1px), radial-gradient(circle at 78% 14%, rgba(7,95,232,.42), transparent 34%), radial-gradient(circle at 18% 58%, rgba(18,184,255,.14), transparent 26%); background-size: 48px 48px, 48px 48px, auto, auto; mask-image: linear-gradient(to bottom, black 82%, transparent); }
+        .hero-glow { background: conic-gradient(from 210deg, rgba(7,95,232,.42), rgba(18,184,255,.05), rgba(18,184,255,.2), rgba(7,95,232,.42)); filter: blur(70px); animation: hero-breathe 9s ease-in-out infinite; }
+        .hero-wheel { color: rgba(18,184,255,.16); filter: drop-shadow(0 28px 45px rgba(7,95,232,.16)); transform-origin: center; mask-image: linear-gradient(125deg, transparent 4%, black 38%, black 72%, transparent 96%); }
+        .hero-road { color: rgba(18,184,255,.2); mask-image: linear-gradient(to bottom, transparent, black 22%, transparent 94%); }
         .hero-road-flow { animation: road-flow 2.8s linear infinite; }
-        .hero-stage { border-color: rgba(35,84,230,.16); box-shadow: 0 10px 30px rgba(35,84,230,.08); }
+        .hero-stage { border-color: rgba(18,184,255,.25); box-shadow: 0 10px 30px rgba(7,95,232,.16); }
         @keyframes hero-breathe { 0%, 100% { transform: scale(1) translate3d(0,0,0); } 50% { transform: scale(1.14) translate3d(-28px,20px,0); } }
         @keyframes road-flow { to { stroke-dashoffset: -66; } }
-        .product-window { box-shadow: 0 36px 90px rgba(15,23,41,.15), 0 8px 28px rgba(35,84,230,.08); transform-style: preserve-3d; }
+        .product-window { box-shadow: 0 42px 100px rgba(0,0,0,.34), 0 10px 34px rgba(7,95,232,.2); transform-style: preserve-3d; }
         .technical-card { position: relative; overflow: hidden; }
         .technical-card::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 36px; height: 2px; background: ${COLORS.blue}; transition: width .35s ease; }
         .technical-card:hover::before { width: 100%; background: rgba(255,255,255,.8); }
@@ -843,12 +1001,7 @@ export default function AutoCoreLanding() {
           }}
         >
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-            <div className="flex items-center gap-2">
-              <BrandMark />
-              <span className="display text-lg font-semibold tracking-tight">
-                AutoCore
-              </span>
-            </div>
+            <BrandLogo />
 
             <nav className="hidden items-center gap-8 md:flex">
               <NavLink href="#produto">O que você recebe</NavLink>
@@ -910,7 +1063,11 @@ export default function AutoCoreLanding() {
         {/* HERO */}
         <section
           className="relative isolate overflow-hidden border-b"
-          style={{ borderColor: COLORS.line }}
+          style={{
+            borderColor: "rgba(18,184,255,.18)",
+            background: COLORS.navy,
+            color: "#F7FAFF",
+          }}
         >
           <HeroBackdrop />
 
@@ -920,8 +1077,11 @@ export default function AutoCoreLanding() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border bg-white/80 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.14em] backdrop-blur"
-                style={{ borderColor: COLORS.line, color: COLORS.blue }}
+                className="mb-6 inline-flex items-center gap-2 rounded-full border bg-white/[.06] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.14em] backdrop-blur"
+                style={{
+                  borderColor: "rgba(18,184,255,.28)",
+                  color: COLORS.blueLight,
+                }}
               >
                 <motion.span
                   className="h-1.5 w-1.5 rounded-full"
@@ -929,7 +1089,7 @@ export default function AutoCoreLanding() {
                   animate={{ opacity: [1, 0.35, 1] }}
                   transition={{ duration: 1.8, repeat: Infinity }}
                 />
-                Um sistema para oficinas com a sua marca
+                Gestão premium, com a identidade da sua oficina
               </motion.div>
 
               <motion.h1
@@ -938,11 +1098,10 @@ export default function AutoCoreLanding() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="display text-5xl font-semibold leading-[.98] tracking-[-.055em] sm:text-6xl lg:text-[4.65rem]"
               >
-                Ofereça um{" "}
-                <span className="bg-gradient-to-r from-[#2354E6] to-[#5B8DEF] bg-clip-text text-transparent">
-                  sistema completo
-                </span>{" "}
-                para oficinas com a sua marca
+                Sua oficina mais organizada.{" "}
+                <span className="bg-gradient-to-r from-[#12B8FF] to-[#4D7DFF] bg-clip-text text-transparent">
+                  Sua gestão, do seu jeito.
+                </span>
               </motion.h1>
 
               <motion.p
@@ -950,11 +1109,11 @@ export default function AutoCoreLanding() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
                 className="mx-auto mt-7 max-w-2xl text-base leading-relaxed lg:text-lg"
-                style={{ color: COLORS.muted }}
+                style={{ color: "#AFC2DA" }}
               >
-                Você recebe a plataforma pronta para personalizar e oferecer aos
-                seus clientes. As oficinas cuidam da rotina e você acompanha
-                tudo em uma área separada.
+                A Ofixy reúne atendimento, orçamentos, ordens de serviço,
+                estoque e financeiro em uma experiência personalizada para a sua
+                operação.
               </motion.p>
 
               <motion.div
@@ -971,7 +1130,7 @@ export default function AutoCoreLanding() {
                   rel="noreferrer"
                   className="btn-primary group flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium transition-all"
                 >
-                  Quero começar agora
+                  Quero transformar minha oficina
                   <ArrowRight
                     size={16}
                     className="transition-transform group-hover:translate-x-1"
@@ -981,8 +1140,8 @@ export default function AutoCoreLanding() {
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
                   href="#como-funciona"
-                  className="rounded-lg border bg-white/70 px-6 py-3 text-sm font-medium backdrop-blur transition-colors hover:bg-white"
-                  style={{ borderColor: COLORS.line, color: COLORS.navy }}
+                  className="rounded-lg border bg-white/[.06] px-6 py-3 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/[.12]"
+                  style={{ borderColor: "rgba(255,255,255,.18)" }}
                 >
                   Ver como funciona
                 </motion.a>
@@ -993,12 +1152,12 @@ export default function AutoCoreLanding() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.65 }}
                 className="mt-9 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs"
-                style={{ color: COLORS.muted }}
+                style={{ color: "#AFC2DA" }}
               >
                 {[
-                  "Sua marca e suas cores",
-                  "Dados de cada oficina separados",
-                  "Tudo em um só lugar",
+                  "Implantação personalizada",
+                  "Rotina completa em um só lugar",
+                  "Visão clara dos resultados",
                 ].map((item) => (
                   <span key={item} className="flex items-center gap-1.5">
                     <CheckCircle2 size={13} style={{ color: COLORS.blue }} />
@@ -1034,7 +1193,10 @@ export default function AutoCoreLanding() {
                 >
                   Exemplo de rede
                 </div>
-                <div className="mt-0.5 flex items-center gap-2 text-sm font-semibold">
+                <div
+                  className="mt-0.5 flex items-center gap-2 text-sm font-semibold"
+                  style={{ color: COLORS.navy }}
+                >
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
                   37 oficinas
                 </div>
@@ -1055,7 +1217,10 @@ export default function AutoCoreLanding() {
                 >
                   Personalização
                 </div>
-                <div className="mt-0.5 flex items-center gap-2 text-sm font-semibold">
+                <div
+                  className="mt-0.5 flex items-center gap-2 text-sm font-semibold"
+                  style={{ color: COLORS.navy }}
+                >
                   <Palette size={14} style={{ color: COLORS.blue }} />
                   Com a sua marca
                 </div>
@@ -1076,16 +1241,16 @@ export default function AutoCoreLanding() {
               UM CAMINHO MAIS SIMPLES
             </span>
             <h2 className="display mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-              Seus clientes precisam de organização. Você não precisa criar um
-              sistema do zero.
+              Menos improviso na rotina. Mais tempo para fazer a oficina
+              crescer.
             </h2>
             <p
               className="mt-5 text-base leading-relaxed"
               style={{ color: COLORS.muted }}
             >
-              A plataforma já reúne o que uma oficina usa no dia a dia. Você
-              coloca sua marca, escolhe como quer oferecer o serviço e pode
-              começar sem manter uma equipe inteira de desenvolvimento.
+              A Ofixy conecta cada etapa do atendimento e deixa a operação com a
+              identidade do seu negócio. Sua equipe ganha agilidade e você
+              acompanha o que realmente importa.
             </p>
           </Reveal>
         </section>
@@ -1098,7 +1263,7 @@ export default function AutoCoreLanding() {
           <div
             aria-hidden="true"
             className="absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full border-[48px] opacity-40"
-            style={{ borderColor: "#DDE7FF" }}
+            style={{ borderColor: "#CFEAFF" }}
           />
           <div className="mx-auto max-w-6xl px-6">
             <Reveal className="text-center">
@@ -1106,17 +1271,18 @@ export default function AutoCoreLanding() {
                 className="text-xs font-semibold tracking-widest"
                 style={{ color: COLORS.blue }}
               >
-                PARA QUEM É
+                FEITA PARA O SEU MOMENTO
               </span>
               <h2 className="display mx-auto mt-3 max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
-                Para quem já atende oficinas ou quer entrar nesse mercado
+                Uma gestão que acompanha o ritmo da sua oficina
               </h2>
               <p
                 className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed"
                 style={{ color: COLORS.muted }}
               >
-                Cada oficina recebe um espaço próprio para trabalhar. Você cuida
-                da sua marca, dos seus clientes e acompanha todas as unidades.
+                Seja uma operação independente, especializada ou uma rede em
+                expansão, a experiência se adapta à sua estrutura e aos seus
+                objetivos.
               </p>
             </Reveal>
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -1127,7 +1293,7 @@ export default function AutoCoreLanding() {
                       y: -9,
                       scale: 1.02,
                       borderColor: COLORS.blue,
-                      boxShadow: "0 24px 60px rgba(35,84,230,.14)",
+                      boxShadow: "0 24px 60px rgba(7,95,232,.16)",
                     }}
                     transition={{ type: "spring", stiffness: 260, damping: 20 }}
                     className="technical-card group h-full cursor-default rounded-2xl border bg-white p-7 shadow-[0_8px_30px_rgba(15,23,41,.04)]"
@@ -1170,10 +1336,10 @@ export default function AutoCoreLanding() {
                 className="text-xs font-semibold tracking-widest"
                 style={{ color: COLORS.blue }}
               >
-                O QUE VOCÊ RECEBE
+                SUA OPERAÇÃO, CONECTADA
               </span>
               <h2 className="display mx-auto mt-3 max-w-xl text-3xl font-semibold tracking-tight md:text-4xl">
-                Uma área para a oficina trabalhar e outra para você acompanhar
+                Tudo o que sua equipe precisa — e a visão que a gestão merece
               </h2>
             </Reveal>
 
@@ -1182,10 +1348,10 @@ export default function AutoCoreLanding() {
               style={{ borderColor: COLORS.line }}
             >
               <TabButton active={prodTab === 0} onClick={() => setProdTab(0)}>
-                Área da oficina
+                Operação da oficina
               </TabButton>
               <TabButton active={prodTab === 1} onClick={() => setProdTab(1)}>
-                Sua área de controle
+                Gestão e resultados
               </TabButton>
             </div>
 
@@ -1224,7 +1390,7 @@ export default function AutoCoreLanding() {
           </div>
         </section>
 
-        {/* WHITE-LABEL */}
+        {/* PERSONALIZAÇÃO */}
         <section className="mx-auto max-w-6xl px-6 py-24">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <Reveal>
@@ -1232,24 +1398,24 @@ export default function AutoCoreLanding() {
                 className="text-xs font-semibold tracking-widest"
                 style={{ color: COLORS.blue }}
               >
-                COM A SUA MARCA
+                UMA EXPERIÊNCIA SÓ SUA
               </span>
               <h2 className="display mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-                Para o cliente, a plataforma é sua
+                A tecnologia também pode ter a cara da sua oficina
               </h2>
               <p
                 className="mt-4 text-sm leading-relaxed"
                 style={{ color: COLORS.muted }}
               >
-                Personalizamos a plataforma para combinar com o seu negócio. A
-                oficina vê sua marca em todos os pontos importantes.
+                Personalizamos a experiência para combinar com o seu negócio,
+                fortalecer sua presença e criar consistência em cada contato.
               </p>
               <ul className="mt-6 flex flex-col gap-3">
                 {[
-                  "Seu nome e logotipo",
-                  "Suas cores",
-                  "Seu próprio endereço na internet",
-                  "Documentos e e-mails com a sua identidade",
+                  "Nome, logotipo e identidade visual",
+                  "Cores alinhadas à sua marca",
+                  "Endereço próprio para sua equipe",
+                  "Documentos e comunicações personalizadas",
                 ].map((it) => (
                   <li key={it} className="flex items-center gap-2 text-sm">
                     <CheckCircle2 size={16} style={{ color: COLORS.blue }} />
@@ -1283,7 +1449,7 @@ export default function AutoCoreLanding() {
               </h2>
             </Reveal>
 
-            <Reveal className="hide-scrollbar mt-14 overflow-x-auto overscroll-x-contain">
+            <Reveal className="hide-scrollbar mt-14 overflow-x-auto overscroll-x-contain py-3">
               <div className="mx-auto flex w-max items-center gap-1 px-2">
                 {flow.map((step, i) => (
                   <React.Fragment key={step}>
@@ -1341,7 +1507,7 @@ export default function AutoCoreLanding() {
               VANTAGENS
             </span>
             <h2 className="display mx-auto mt-3 max-w-lg text-3xl font-semibold tracking-tight md:text-4xl">
-              Por que usar a AutoCore
+              Por que escolher a Ofixy
             </h2>
           </Reveal>
 
@@ -1386,7 +1552,7 @@ export default function AutoCoreLanding() {
             >
               <div
                 className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full blur-3xl"
-                style={{ background: "rgba(91,141,239,0.35)" }}
+                style={{ background: "rgba(18,184,255,0.28)" }}
               />
               <motion.div
                 aria-hidden="true"
@@ -1401,15 +1567,15 @@ export default function AutoCoreLanding() {
                 transition={{ duration: 2.4, repeat: Infinity }}
               />
               <h2 className="display mx-auto max-w-xl text-3xl font-semibold tracking-tight text-white md:text-4xl">
-                Quer saber se a plataforma combina com o seu negócio?
+                Pronto para elevar o padrão da sua oficina?
               </h2>
               <p
                 className="mx-auto mt-4 max-w-md text-sm"
                 style={{ color: "#94A3C4" }}
               >
-                Fale com a gente pelo WhatsApp. Mostramos como tudo funciona,
-                entendemos o que você precisa e explicamos valores e próximos
-                passos sem compromisso.
+                Conte como sua oficina funciona hoje. Nós mostramos uma
+                experiência personalizada para sua equipe e explicamos os
+                próximos passos com clareza.
               </p>
               <motion.a
                 whileHover={{ y: -2 }}
@@ -1420,7 +1586,7 @@ export default function AutoCoreLanding() {
                 className="btn-primary mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-medium transition-colors"
               >
                 <WhatsAppIcon />
-                Quero começar com minha marca
+                Quero conhecer a Ofixy
               </motion.a>
               <div className="mt-6 flex flex-col items-center justify-center gap-2 text-sm text-slate-300 sm:flex-row sm:gap-6">
                 <a
@@ -1485,18 +1651,13 @@ export default function AutoCoreLanding() {
           <div className="mx-auto max-w-6xl px-6 py-12">
             <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-5">
               <div className="col-span-2">
-                <div className="flex items-center gap-2">
-                  <BrandMark />
-                  <span className="display text-base font-semibold">
-                    AutoCore
-                  </span>
-                </div>
+                <BrandLogo />
                 <p
                   className="mt-3 max-w-xs text-sm"
                   style={{ color: COLORS.muted }}
                 >
-                  Um sistema completo para oficinas, personalizado com a marca
-                  de quem oferece.
+                  Gestão completa e personalizada para oficinas que querem
+                  operar com mais clareza, controle e presença de marca.
                 </p>
                 <div className="mt-4 flex flex-col items-start gap-2 text-sm">
                   <a
@@ -1545,13 +1706,25 @@ export default function AutoCoreLanding() {
                   <ul className="mt-3 flex flex-col gap-2">
                     {col.items.map((it) => (
                       <li key={it}>
-                        <a
-                          href="#"
-                          className="text-sm"
-                          style={{ color: COLORS.muted }}
-                        >
-                          {it}
-                        </a>
+                        {it === "Sobre" ? (
+                          <button
+                            type="button"
+                            onClick={() => setAboutOpen(true)}
+                            className="text-left text-sm hover:text-black"
+                            style={{ color: COLORS.muted }}
+                            aria-haspopup="dialog"
+                          >
+                            Sobre a Ofixy
+                          </button>
+                        ) : (
+                          <a
+                            href="#"
+                            className="text-sm hover:text-black"
+                            style={{ color: COLORS.muted }}
+                          >
+                            {it}
+                          </a>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -1563,7 +1736,7 @@ export default function AutoCoreLanding() {
               style={{ borderColor: COLORS.line, color: COLORS.muted }}
             >
               <span>
-                © {new Date().getFullYear()} AutoCore. Todos os direitos
+                © {new Date().getFullYear()} Ofixy. Todos os direitos
                 reservados.
               </span>
               <div className="flex gap-6">
@@ -1577,6 +1750,9 @@ export default function AutoCoreLanding() {
             </div>
           </div>
         </footer>
+        <AnimatePresence>
+          {aboutOpen ? <AboutModal onClose={() => setAboutOpen(false)} /> : null}
+        </AnimatePresence>
       </div>
     </MotionConfig>
   );
