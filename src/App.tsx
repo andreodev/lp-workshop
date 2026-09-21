@@ -537,12 +537,11 @@ const flow = [
 ];
 
 const whatsappHighlights = [
-  "Confirmações, lembretes e avisos de veículo pronto",
-  "Orçamentos, aprovações e recusas pelo WhatsApp",
-  "Cobranças, links de pagamento e confirmação automática",
-  "Revisão preventiva, troca de óleo e serviços recorrentes",
-  "Pesquisas de satisfação e reativação de clientes antigos",
-  "Histórico, templates e mensagens com nome, veículo e placa",
+  "Envio de orçamentos em PDF direto na conversa",
+  "Aviso automático quando o serviço começar",
+  "Mensagem automática quando o veículo estiver pronto",
+  "Lembretes de feedback após o atendimento",
+  "Mensagens com nome, veículo, placa e dados da oficina",
 ];
 
 const diferenciais = [
@@ -1417,18 +1416,17 @@ export default function OfixyLanding() {
                 AUTOMAÇÕES NO WHATSAPP
               </span>
               <h2 className="display mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-                Atenda, lembre e cobre seus clientes automaticamente pelo
-                WhatsApp
+                Atenda seus clientes pelo WhatsApp com mensagens automáticas
+                em momentos-chave da oficina
               </h2>
               <p
                 className="mt-4 text-sm leading-relaxed"
                 style={{ color: COLORS.muted }}
               >
-                Automatize mensagens importantes da oficina, como confirmações
-                de agendamento, envio de orçamentos, avisos de veículo pronto,
-                lembretes de revisão, cobranças e pesquisas de satisfação. Tudo
-                com mensagens personalizadas para cada cliente, sem depender de
-                acompanhamento manual da equipe.
+                Envie orçamentos em PDF, avise automaticamente quando o serviço
+                começar ou quando o veículo estiver pronto, e acompanhe clientes
+                após o atendimento com lembretes de feedback personalizados com
+                nome, veículo, placa e dados da oficina.
               </p>
               <motion.a
                 whileHover={{ y: -2 }}
