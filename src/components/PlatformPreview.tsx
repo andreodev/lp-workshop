@@ -1,5 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Archive,
   ArrowDownLeft,
@@ -44,11 +44,7 @@ function darkenHex(hex: string, amount = 0.44) {
   return `rgb(${channel(16)} ${channel(8)} ${channel(0)})`;
 }
 
-const brands = [
-  { name: "Rikinho Auto Center", short: "R", primary: "#E30613", secondary: "#111315" },
-  { name: "Central Motors", short: "CM", primary: "#2354E6", secondary: "#0F1729" },
-  { name: "Oficina Vetor", short: "V", primary: "#0F8A72", secondary: "#12332E" },
-];
+const demoBrand = { name: "Ofixy · Sua oficina", short: "O", primary: "#1768EF", secondary: "#10213D" };
 
 type PageId = "inicio" | "atendimentos" | "central" | "ordens" | "clientes" | "veiculos" | "mecanicos" | "estoque" | "financeiro" | "configuracoes";
 type MenuItem = { id: PageId; label: string; icon: LucideIcon };
@@ -76,7 +72,7 @@ const menu: Array<{ title: string; items: MenuItem[] }> = [
   { title: "Sistema", items: [{ id: "configuracoes", label: "Configurações", icon: Settings }] },
 ];
 
-type Brand = (typeof brands)[number];
+type Brand = typeof demoBrand;
 
 function PageHeader({ title, description, action, brand }: { title: string; description: string; action?: string; brand: Brand }) {
   return (
@@ -192,17 +188,8 @@ function SettingsScreen({ brand }: { brand: Brand }) {
 
 export function PlatformPreview() {
   const [activePage, setActivePage] = useState<PageId>("inicio");
-  const [brandIndex, setBrandIndex] = useState(0);
-  const [isExploring, setIsExploring] = useState(false);
-  const reduceMotion = useReducedMotion();
-  const brand = brands[brandIndex];
+  const brand = demoBrand;
   const sidebarDark = darkenHex(brand.primary);
-
-  useEffect(() => {
-    if (reduceMotion || isExploring) return;
-    const timer = setInterval(() => setBrandIndex((index) => (index + 1) % brands.length), 2800);
-    return () => clearInterval(timer);
-  }, [isExploring, reduceMotion]);
 
   const screen = activePage === "inicio" ? <DashboardScreen brand={brand} goTo={setActivePage} />
     : activePage === "atendimentos" ? <AttendancesScreen brand={brand} goTo={setActivePage} />
@@ -213,11 +200,11 @@ export function PlatformPreview() {
               : <ListScreen pageId={activePage} brand={brand} />;
 
   return (
-    <motion.div data-testid="platform-preview" data-demo-page={activePage} initial={{ opacity: 0, y: 34, scale: 0.985 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }} onMouseEnter={() => setIsExploring(true)} onMouseLeave={() => setIsExploring(false)} className="product-window pointer-events-none relative w-full overflow-hidden rounded-2xl border bg-white text-left text-slate-900 lg:pointer-events-auto" style={{ borderColor: `${brand.primary}36` }}>
-      <div className="flex h-10 items-center justify-between border-b bg-[#F8FAFC] px-3 sm:px-4" style={{ borderColor: LINE }}><div className="flex gap-1.5" aria-hidden="true"><span className="h-2.5 w-2.5 rounded-full bg-[#FF6B6B]" /><span className="h-2.5 w-2.5 rounded-full bg-[#FFD43B]" /><span className="h-2.5 w-2.5 rounded-full bg-[#51CF66]" /></div><div className="hidden items-center gap-2 rounded-md border bg-white px-3 py-1 text-[10px] text-slate-400 sm:flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />ambiente de demonstração · dados fictícios</div><div className="flex items-center gap-2">{brands.map((item, index) => <button key={item.name} type="button" aria-label={`Usar identidade ${item.name}`} onClick={() => setBrandIndex(index)} className="h-2.5 w-2.5 rounded-full transition-transform hover:scale-125" style={{ background: item.primary, boxShadow: brandIndex === index ? `0 0 0 2px white, 0 0 0 3px ${item.primary}` : "none" }} />)}</div></div>
+    <motion.div data-testid="platform-preview" data-demo-page={activePage} initial={false} className="product-window relative w-full overflow-hidden rounded-2xl border bg-white text-left text-slate-900" style={{ borderColor: `${brand.primary}36` }}>
+      <div className="flex h-10 items-center justify-between border-b bg-[#F8FAFC] px-3 sm:px-4" style={{ borderColor: LINE }}><div className="flex gap-1.5" aria-hidden="true"><span className="h-2.5 w-2.5 rounded-full bg-[#FF6B6B]" /><span className="h-2.5 w-2.5 rounded-full bg-[#FFD43B]" /><span className="h-2.5 w-2.5 rounded-full bg-[#51CF66]" /></div><div className="hidden items-center gap-2 rounded-md border bg-white px-3 py-1 text-[10px] text-slate-400 sm:flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />ambiente de demonstração · dados fictícios</div><span className="text-[9px] font-semibold text-slate-400">Ofixy</span></div>
       <div className="flex h-[560px] sm:h-[580px]">
-        <aside className="hidden w-[190px] shrink-0 flex-col text-white lg:flex" style={{ background: `radial-gradient(circle at 18% 0%, rgba(255,255,255,.24), transparent 38%), linear-gradient(155deg, ${brand.primary} 0%, ${sidebarDark} 100%)` }}><div className="flex min-h-20 items-center gap-2.5 border-b border-white/10 px-4"><motion.div key={brand.short} initial={{ opacity: 0, scale: .75, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: isExploring ? 0 : .32 }} className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/25 bg-white text-[11px] font-black" style={{ color: brand.primary }}>{brand.short}</motion.div><AnimatePresence mode="wait"><motion.span key={brand.name} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 8 }} transition={{ duration: isExploring ? 0 : .28 }} className="text-xs font-bold leading-tight">{brand.name}</motion.span></AnimatePresence></div><nav className="hide-scrollbar flex-1 overflow-y-auto px-2 py-3" aria-label="Navegação da plataforma demonstrativa">{menu.map((group) => <div key={group.title} className="mb-3"><div className="px-2 pb-1.5 text-[8px] font-semibold uppercase tracking-[.16em] text-white/45">{group.title}</div><div className="space-y-0.5">{group.items.map((item) => <button key={item.id} type="button" onClick={() => setActivePage(item.id)} className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-[9px] font-medium" style={{ background: activePage === item.id ? "rgba(255,255,255,.18)" : "transparent", color: activePage === item.id ? "#fff" : "rgba(255,255,255,.72)" }}><item.icon size={12} />{item.label}</button>)}</div></div>)}</nav><div className="m-3 flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 p-2.5"><div className="grid h-7 w-7 place-items-center rounded-lg bg-white/15 text-[8px] font-bold">AS</div><div><div className="text-[8px] font-semibold">Amanda Silva</div><div className="text-[7px] text-white/50">Administradora</div></div></div></aside>
-        <main className="flex min-w-0 flex-1 flex-col overflow-hidden bg-[#F5F4F1]"><div className="flex h-12 shrink-0 items-center justify-between border-b bg-white px-3 sm:px-4" style={{ borderColor: LINE }}><div className="flex items-center gap-2"><motion.div key={brand.short} className="grid h-7 w-7 place-items-center rounded-lg text-[8px] font-bold text-white lg:hidden" style={{ background: brand.primary }}>{brand.short}</motion.div><div className="hidden h-7 w-48 items-center gap-2 rounded-lg border bg-slate-50 px-3 text-[7px] text-slate-400 lg:flex" style={{ borderColor: LINE }}><Search size={9} /> Buscar cliente, OS, placa...</div></div><div className="flex items-center gap-2"><span className="text-[8px] font-semibold text-slate-600 lg:hidden">Financeiro</span><button type="button" aria-label="Notificações" className="grid h-7 w-7 place-items-center rounded-lg border text-slate-500" style={{ borderColor: LINE }}><Bell size={10} /></button><button type="button" className="hidden rounded-lg px-3 py-2 text-[7px] font-semibold text-white lg:block" style={{ background: brand.primary }}>Abrir PDV</button></div></div><div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto p-3 sm:p-4"><div className="h-full lg:hidden"><FinanceScreen brand={brand} /></div><div className="hidden h-full lg:block"><AnimatePresence mode="wait"><motion.div key={activePage} initial={{ opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} transition={{ duration: .18 }} className="h-full">{screen}</motion.div></AnimatePresence></div></div></main>
+        <aside className="hidden w-[190px] shrink-0 flex-col text-white lg:flex" style={{ background: `radial-gradient(circle at 18% 0%, rgba(255,255,255,.24), transparent 38%), linear-gradient(155deg, ${brand.primary} 0%, ${sidebarDark} 100%)` }}><div className="flex min-h-20 items-center gap-2.5 border-b border-white/10 px-4"><motion.div key={brand.short} initial={{ opacity: 0, scale: .75, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: .32 }} className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/25 bg-white text-[11px] font-black" style={{ color: brand.primary }}>{brand.short}</motion.div><AnimatePresence mode="wait"><motion.span key={brand.name} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 8 }} transition={{ duration: .28 }} className="text-xs font-bold leading-tight">{brand.name}</motion.span></AnimatePresence></div><nav className="hide-scrollbar flex-1 overflow-y-auto px-2 py-3" aria-label="Navegação da plataforma demonstrativa">{menu.map((group) => <div key={group.title} className="mb-3"><div className="px-2 pb-1.5 text-[8px] font-semibold uppercase tracking-[.16em] text-white/45">{group.title}</div><div className="space-y-0.5">{group.items.map((item) => <button key={item.id} type="button" onClick={() => setActivePage(item.id)} className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-[9px] font-medium" style={{ background: activePage === item.id ? "rgba(255,255,255,.18)" : "transparent", color: activePage === item.id ? "#fff" : "rgba(255,255,255,.72)" }}><item.icon size={12} />{item.label}</button>)}</div></div>)}</nav><div className="m-3 flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 p-2.5"><div className="grid h-7 w-7 place-items-center rounded-lg bg-white/15 text-[8px] font-bold">AS</div><div><div className="text-[8px] font-semibold">Amanda Silva</div><div className="text-[7px] text-white/50">Administradora</div></div></div></aside>
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden bg-[#F5F4F1]"><div className="flex h-12 shrink-0 items-center justify-between border-b bg-white px-3 sm:px-4" style={{ borderColor: LINE }}><div className="flex items-center gap-2"><motion.div key={brand.short} className="grid h-7 w-7 place-items-center rounded-lg text-[8px] font-bold text-white lg:hidden" style={{ background: brand.primary }}>{brand.short}</motion.div><div className="hidden h-7 w-48 items-center gap-2 rounded-lg border bg-slate-50 px-3 text-[7px] text-slate-400 lg:flex" style={{ borderColor: LINE }}><Search size={9} /> Buscar cliente, OS, placa...</div></div><div className="flex items-center gap-2"><span className="text-[10px] font-semibold text-slate-600 lg:hidden">{menu.flatMap((group) => group.items).find((item) => item.id === activePage)?.label}</span><button type="button" aria-label="Notificações" className="grid h-7 w-7 place-items-center rounded-lg border text-slate-500" style={{ borderColor: LINE }}><Bell size={10} /></button><button type="button" className="hidden rounded-lg px-3 py-2 text-[7px] font-semibold text-white lg:block" style={{ background: brand.primary }}>Abrir PDV</button></div></div><div className="preview-mobile-nav lg:hidden"><span>Explore as áreas <ArrowRight size={12} aria-hidden="true" /></span><nav aria-label="Áreas da plataforma demonstrativa">{menu.flatMap((group) => group.items).map((item) => <button key={item.id} type="button" aria-pressed={activePage === item.id} onClick={() => setActivePage(item.id)}><item.icon size={15} aria-hidden="true" />{item.label}</button>)}</nav></div><div className="hide-scrollbar min-h-0 flex-1 overflow-y-auto p-3 sm:p-4"><AnimatePresence mode="wait"><motion.div key={activePage} initial={{ opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} transition={{ duration: .18 }} className="h-full">{screen}</motion.div></AnimatePresence></div></div>
       </div>
     </motion.div>
   );
