@@ -17,9 +17,9 @@ pnpm test:seo
 
 ## Publicação
 
-O build exporta o site em **`out/`**. `.next/` contém arquivos internos do build/desenvolvimento e não deve ser publicado. O antigo `dist/` do Vite não é mais a saída do projeto.
+O build exporta o site em **`out/`**. `.next/` contém os manifests internos usados pela integração Next.js da Vercel; não copie esse diretório para uma hospedagem estática comum. O antigo `dist/` do Vite não é mais a saída do projeto.
 
-`vercel.json` configura Next.js, `pnpm build`, saída `out` e URLs sem `.html`. Em outra hospedagem, configure resolução de arquivos `.html` e `404.html`; não use fallback de SPA para `index.html`. Preserve o redirecionamento existente de `ofixy.com.br` para `www.ofixy.com.br` e de HTTP para HTTPS. Não foi feito deploy nesta tarefa.
+`vercel.json` configura o preset Next.js, `pnpm build`, diretório interno `.next` e URLs sem `.html`. A integração da Vercel lê os manifests em `.next/` e identifica a exportação estática em `out/` automaticamente. Não configure `outputDirectory: "out"` junto ao preset Next.js: isso faz a Vercel procurar `routes-manifest.json` no diretório errado. Em outra hospedagem, configure resolução de arquivos `.html` e `404.html`; não use fallback de SPA para `index.html`. Preserve o redirecionamento existente de `ofixy.com.br` para `www.ofixy.com.br` e de HTTP para HTTPS. Não foi feito deploy nesta tarefa.
 
 ## Conteúdo e SEO
 

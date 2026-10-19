@@ -23,7 +23,7 @@ Data: 19/10/2026. Domínio oficial: https://www.ofixy.com.br/.
 
 Migração da infraestrutura para **Next.js 16.4.2 / App Router**, mantendo o layout, os componentes visuais, a prévia navegável e o formulário existente. As sete páginas são pré-renderizadas no build. Somente menu móvel, formulário e demonstração usam componentes cliente. Links de conteúdo não pré-carregam automaticamente as seis páginas, evitando tráfego desnecessário no mobile. A demonstração e o código de animação pertencem à home; não são necessários nas páginas de funcionalidades.
 
-A saída utiliza `out/`, padrão de exportação estática do Next.js, separada dos arquivos internos de desenvolvimento em `.next/`. A hospedagem identificada é Vercel e recebeu configuração explícita em `vercel.json`. A configuração é baseada no [suporte oficial à exportação estática](https://nextjs.org/docs/app/guides/static-exports) e na [Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata).
+A saída utiliza `out/`, padrão de exportação estática do Next.js, separada dos arquivos internos de desenvolvimento em `.next/`. A hospedagem identificada é Vercel e recebeu configuração explícita em `vercel.json`. No preset Next.js, `outputDirectory` aponta para `.next`, onde estão os manifests; a integração identifica `out/` como exportação estática. A configuração anterior que apontava o preset Next.js diretamente para `out/` foi corrigida após o erro NEXT_NO_ROUTES_MANIFEST. A configuração é baseada no [suporte oficial à exportação estática](https://nextjs.org/docs/app/guides/static-exports) e na [Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata).
 
 Foram implementados títulos e descrições específicos, canonical e OG URL por rota, Twitter Cards e imagem de marca. O sitemap deriva da lista única de páginas públicas e não inventa datas de atualização. O robots permite rastreamento público, inclusive por Googlebot, Bingbot e OAI-SearchBot, e bloqueia os caminhos privados convencionais. Rotas inexistentes recebem página 404 com `noindex`.
 
@@ -73,7 +73,7 @@ Alterações de marca recebidas em paralelo e preservadas: `public/favicon.svg`,
 
 ## Publicação e pendências externas
 
-1. Publicar o resultado em `out/`. O site público consultado na auditoria ainda era a versão anterior; não foi feito deploy nem enviado sitemap nesta tarefa.
+1. Na Vercel, publicar usando o preset Next.js e os manifests de `.next/`, conforme `vercel.json`; a integração encontra a exportação `out/`. Em uma hospedagem estática comum, publicar somente `out/`. O site público consultado na auditoria ainda era a versão anterior; não foi feito deploy nem enviado sitemap nesta tarefa.
 2. Verificar no ambiente publicado as sete URLs com resposta 200, `/robots.txt`, `/sitemap.xml`, imagens sociais e páginas inexistentes com 404. Confirmar que configurações anteriores de SPA não reescrevem tudo para a home.
 3. Enviar `https://www.ofixy.com.br/sitemap.xml` ao Search Console; inspecionar e solicitar indexação da home e das seis páginas listadas no README. Repetir o envio no Bing Webmaster Tools se houver acesso.
 4. Validar JSON-LD no Schema Markup Validator e, quando aplicável, no Rich Results Test após o deploy. Ausência de preço/avaliação pode limitar resultados específicos de software; esses dados não devem ser inventados.

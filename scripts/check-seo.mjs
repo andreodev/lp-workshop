@@ -11,6 +11,15 @@ const documents = new Map(slugs.map(slug => [slug, readFileSync(join('out', slug
 const attribute = (tag, name) => tag.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];
 const meta = (html, name) => [...html.matchAll(/<meta\b[^>]*>/g)].map(match => match[0]).find(tag => attribute(tag, 'name') === name || attribute(tag, 'property') === name);
 
+const vercel = JSON.parse(readFileSync('vercel.json', 'utf8'));
+assert.equal(vercel.framework, 'nextjs');
+const buildDirectory = vercel.outputDirectory ?? '.next';
+assert(existsSync(join(buildDirectory, 'routes-manifest.json')), 'Vercel must read Next.js manifests, not the static export directory');
+const exported = JSON.parse(readFileSync(join(buildDirectory, 'export-detail.json'), 'utf8'));
+assert.equal(exported.success, true);
+assert(existsSync(join(exported.outDirectory, 'index.html')), 'Vercel must be able to locate the static export');
+console.log('OK Vercel: Next.js manifests and static export');
+
 for (const [slug, html] of documents) {
   const path = slug ? `/${slug}` : '/';
   const title = html.match(/<title>(.*?)<\/title>/s)?.[1];
