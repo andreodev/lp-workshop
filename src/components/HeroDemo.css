@@ -1,21 +1,21 @@
 .nav-actions{display:flex;align-items:center;gap:23px}
 .nav-login{display:flex;align-items:center;gap:6px;font-size:10px;color:#64728a;font-weight:700}
-.nav-login:hover{color:#1768ef}
+.nav-login:hover{color:var(--brand-primary)}
 .hero-v2{position:relative;isolation:isolate;overflow:clip;background:linear-gradient(180deg,#fbfcff 0%,#f3f7ff 62%,#fff 100%)}
 .hero-v2-glow{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 58%,#dce9ff9c,transparent 58%)}
 .hero-v2-glow::before,.hero-v2-glow::after{content:'';position:absolute;top:0;bottom:0;left:max(26px,calc((100% - 1320px)/2));border-left:1px solid #e6ecf580}
 .hero-v2-glow::after{left:auto;right:max(26px,calc((100% - 1320px)/2))}
 .hero-v2-content{padding-top:44px;text-align:center}
 .hero-v2-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border-radius:100px;background:#fff;border:1px solid #e0e8f4;box-shadow:0 3px 8px #28487903;color:#7687a1;font-size:9px}
-.hero-v2-badge>svg{color:#1768ef}
+.hero-v2-badge>svg{color:var(--brand-primary)}
 .hero-v2-badge>span:first-of-type{font-size:8px;font-weight:800;letter-spacing:.9px;color:#536d94}
 .badge-divider{width:1px;height:10px;background:#dfe7f3;margin:0 2px}
-.hero-v2 h1{font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:clamp(39px,4.3vw,61px);letter-spacing:-2.7px;line-height:1.12;margin:20px auto 16px;color:#162842;max-width:1080px}
-.hero-v2 h1>span{color:#2469e8}
+.hero-v2 h1{font-family:var(--font-nunito),sans-serif;font-weight:800;font-size:clamp(39px,4.3vw,61px);letter-spacing:-2.7px;line-height:1.12;margin:20px auto 16px;color:#162842;max-width:1080px}
+.hero-v2 h1>span{color:var(--brand-primary)}
 .hero-v2-description{font-size:15px;font-weight:400;line-height:1.9;color:#78859a;margin:0 auto;max-width:650px}
 .hero-v2-actions{display:flex;align-items:center;justify-content:center;gap:12px;margin:22px 0 13px}
-.hero-v2-actions .button{padding:16px 23px;font-size:12px;border-radius:10px;background:#2469e8;box-shadow:0 5px 12px #2469e827,inset 0 1px #ffffff30;min-height:50px}
-.hero-v2-actions .button:hover{background:#1357ce}
+.hero-v2-actions .button{padding:16px 23px;font-size:12px;border-radius:10px;background:var(--brand-primary);box-shadow:0 5px 12px #0064ff27,inset 0 1px #ffffff30;min-height:50px}
+.hero-v2-actions .button:hover{background:var(--brand-hover)}
 .hero-v2-secondary{display:flex;align-items:center;justify-content:center;gap:16px;min-height:50px;border:1px solid #dce5f1;background:#ffffffb3;padding:14px 23px;border-radius:10px;font-size:11px;font-weight:700;color:#54667f;transition:background .2s,border-color .2s}
 .hero-v2-secondary:hover{background:#fff;border-color:#a9c6ef}
 .hero-v2-assurances{display:flex;justify-content:center;align-items:center;gap:25px;font-size:9px;color:#8292a9}
@@ -33,10 +33,10 @@
 .showcase-outcomes>span{display:flex;align-items:center;gap:8px}
 .showcase-outcomes svg{color:#7f9ec8;stroke-width:1.5}
 .showcase-invitation{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:9px;color:#8d9db3;margin-top:17px}
-.showcase-invitation:hover{color:#2469e8}
+.showcase-invitation:hover{color:var(--brand-primary)}
 .hero-v2-audience{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:28px 0;margin-top:48px;border-top:1px solid #e6edf7;text-align:left}
 .hero-v2-audience>span{font-size:8px;font-weight:700;letter-spacing:1.2px;color:#96a4b8}
-.hero-v2-audience>div{display:flex;align-items:center;gap:24px;color:#8291a8;font-family:'Nunito Sans',sans-serif;font-size:14px;font-weight:700}
+.hero-v2-audience>div{display:flex;align-items:center;gap:24px;color:#8291a8;font-family:var(--font-nunito),sans-serif;font-size:14px;font-weight:700}
 .hero-v2-audience i{width:3px;height:3px;background:#b9c9df;border-radius:50%}
 @media(min-width:1500px){.hero-v2-content{padding-top:79px}.hero-v2 h1{font-size:70px}}
 @media(max-width:1000px){.nav-actions{gap:14px}.nav-login{font-size:9px}.desktop-nav{gap:22px}.hero-v2 h1{font-size:clamp(37px,5.1vw,54px);letter-spacing:-2px}.showcase-outcomes{gap:30px}.hero-v2-audience>div{gap:15px;font-size:12px}.hero-v2-audience>span{font-size:7px}}

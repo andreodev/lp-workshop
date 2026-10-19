@@ -1,8 +1,10 @@
+'use client';
+
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { MotionConfig, motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { ArrowDown, Check, ClipboardList, Wallet, Wrench } from 'lucide-react';
 import { PlatformPreview } from './PlatformPreview';
-import './HeroDemo.css';
+import { contactUrl } from '../lib/site';
 
 export function HeroDemo() {
   const preview = useRef<HTMLDivElement>(null);
@@ -16,14 +18,14 @@ export function HeroDemo() {
   const y = useTransform(scrollYProgress, [0, 1], [14, 0]);
 
   return (
-    <div id="plataforma" className="product-showcase" ref={preview}>
+    <MotionConfig reducedMotion="user"><div id="plataforma" className="product-showcase" ref={preview}>
       <div className="showcase-intro"><span>CONHEÇA SEU NOVO JEITO DE GERIR</span><ArrowDown size={15} aria-hidden="true" /></div>
       <motion.div className="showcase-frame" style={reducedMotion ? undefined : { scale, rotateX, y, transformPerspective: 1400 }}>
         <div className="showcase-toolbar"><div><span className="showcase-live-dot" />Sua oficina, em uma única visão.</div><span>Prévia interativa · dados fictícios</span></div>
         <PlatformPreview />
       </motion.div>
       <div className="showcase-outcomes"><span><ClipboardList size={17} /> Orçamentos organizados</span><span><Wrench size={17} /> Equipe conectada</span><span><Wallet size={17} /> Financeiro à vista</span></div>
-      <a href="#demonstracao" className="showcase-invitation"><Check size={14} /> Quer ver na sua rotina? Solicite uma demonstração.</a>
-    </div>
+      <a href={contactUrl} target="_blank" rel="noopener noreferrer" className="showcase-invitation"><Check size={14} /> Quer ver na sua rotina? Solicite uma demonstração.</a>
+    </div></MotionConfig>
   );
 }

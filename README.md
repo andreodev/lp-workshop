@@ -1,75 +1,51 @@
-# React + TypeScript + Vite
+# Ofixy — site público
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site oficial: https://www.ofixy.com.br/. Next.js 16.4.2, React 19, TypeScript, App Router e Tailwind CSS 4. O conteúdo é gerado em HTML durante o build; não depende de login nem de chamadas ao sistema administrativo.
 
-Currently, two official plugins are available:
+## Desenvolvimento e verificações
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+pnpm lint
+pnpm build
+pnpm typecheck
+pnpm test:seo
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`pnpm preview` é um alias do servidor local Next.js de desenvolvimento. Para validar a publicação estática, sirva o diretório `out` em um servidor com suporte a URLs sem extensão (`/orcamentos` → `/orcamentos.html`) e resposta 404 real para caminhos inexistentes.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Publicação
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+O build exporta o site em **`out/`**. `.next/` contém arquivos internos do build/desenvolvimento e não deve ser publicado. O antigo `dist/` do Vite não é mais a saída do projeto.
 
-```
+`vercel.json` configura Next.js, `pnpm build`, saída `out` e URLs sem `.html`. Em outra hospedagem, configure resolução de arquivos `.html` e `404.html`; não use fallback de SPA para `index.html`. Preserve o redirecionamento existente de `ofixy.com.br` para `www.ofixy.com.br` e de HTTP para HTTPS. Não foi feito deploy nesta tarefa.
+
+## Conteúdo e SEO
+
+- `src/lib/site.ts`: domínio, contato comercial existente e lista de páginas públicas.
+- `src/lib/features.ts`: textos, benefícios e FAQs das seis páginas estratégicas; descrições baseadas nos recursos já publicados no projeto.
+- `src/lib/seo.ts`: metadata por página, canonical, Open Graph e Twitter Cards.
+- `src/app/layout.tsx`: identidade da marca em JSON-LD, fontes locais servidas pelo Next e componentes compartilhados.
+- `src/app/sitemap.ts` e `src/app/robots.ts`: arquivos gerados automaticamente no build.
+- `scripts/check-seo.mjs`: valida o HTML exportado, metadata única, schemas, links, sitemap, FAQ, WhatsApp e exclusão de caminhos privados.
+
+A versão de produção não usa otimizador de imagens em tempo de execução: o logo SVG e o banner PNG da marca já são leves e têm dimensões definidas. Para adicionar fotos ou capturas, prepare arquivos WebP/AVIF e variantes responsivas antes da publicação. Os arquivos em `src/assets` não são publicados automaticamente.
+
+Os crawlers Googlebot, Bingbot e OAI-SearchBot são atendidos pela regra `User-Agent: *`, com acesso ao conteúdo público. As rotas privadas não existem neste site e não entram no sitemap. O robots do domínio público não controla o subdomínio `app.ofixy.com.br`; autenticação e políticas de indexação desse aplicativo devem ser verificadas no projeto responsável.
+
+## Search Console
+
+Após publicar, envie https://www.ofixy.com.br/sitemap.xml e inspecione:
+
+- https://www.ofixy.com.br/
+- https://www.ofixy.com.br/sistema-para-oficina-mecanica
+- https://www.ofixy.com.br/ordem-de-servico
+- https://www.ofixy.com.br/orcamentos
+- https://www.ofixy.com.br/controle-de-estoque
+- https://www.ofixy.com.br/gestao-financeira
+- https://www.ofixy.com.br/agendamentos
+
+Use o teste de URL publicada antes de solicitar indexação. Também é possível enviar o sitemap ao Bing Webmaster Tools. A implementação permite descoberta e leitura; indexação e posicionamento dependem dos mecanismos de busca.
+
+Auditoria, arquivos alterados, verificações e pendências: [docs/seo-audit.md](docs/seo-audit.md).
